@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Emotion Detection Powered By SectorNova</title>
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='Logo.png') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <img src="{{ url_for('static', filename='Logo.png') }}" alt="SectorNova logo" class="corner-logo" title="SectorNova" />
+
+  <header>
+    <h1>🎭 Live Emotion Detection <span class="powered">Powered By <b>SectorNova</b></span></h1>
+    <p class="subtitle">CNN • FER-2013 • 7 emotions</p>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="live">📹 Live Webcam</button>
+    <button class="tab" data-tab="upload">🖼️ Upload Image</button>
+  </nav>
+
+  <!-- ============ LIVE TAB ============ -->
+  <main id="tab-live" class="panel">
+    <div class="live-grid">
+      <section class="card video-card">
+        <div class="video-wrap">
+          <img id="stream" alt="Webcam stream" hidden />
+          <div id="stream-placeholder" class="placeholder">
+            Camera is off. Press <b>Start</b> to begin live detection.
+          </div>
+        </div>
+        <div class="controls">
+          <button id="btn-start" class="btn btn-green">Start Camera</button>
+          <button id="btn-stop" class="btn btn-red" disabled>Stop Camera</button>
+          <span id="live-status" class="status">Idle</span>
+        </div>
+        <p class="hint">Tip: sit in good light and look straight at the camera.</p>
+      </section>
+
+      <section class="card">
+        <h2>Detected Emotions</h2>
+        <div id="live-faces">
+          <p class="placeholder small">No face detected yet.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ============ UPLOAD TAB ============ -->
+  <main id="tab-upload" class="panel hidden">
+    <div class="live-grid">
+      <section class="card">
+        <h2>Upload a Photo</h2>
+        <form id="upload-form">
+          <div id="drop-zone" class="drop-zone">
+            <span>Drag &amp; drop an image here,<br />or click to browse</span>
+            <input type="file" id="file-input" accept="image/*" hidden />
+          </div>
+          <p id="file-name" class="file-name"></p>
+          <button type="submit" id="btn-analyze" class="btn btn-blue" disabled>
+            Analyze Emotion
+          </button>
+        </form>
+        <p id="upload-error" class="error hidden"></p>
+      </section>
+
+      <section class="card">
+        <h2>Result</h2>
+        <div id="upload-result">
+          <p class="placeholder small">Upload an image to see the detected emotion.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>Built with Flask + TensorFlow · Runs locally on your machine</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

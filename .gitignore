@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Virtual env
+venv/
+env/
+.venv/
+
+# VS Code / IDE
+.vscode/
+.idea/
+
+# Dataset (FER2013 images - too large, ~29k files)
+# Download separately; see README for structure
+data/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs / temp
+*.log
+*.tmp

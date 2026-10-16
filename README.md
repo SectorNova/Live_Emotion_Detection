@@ -44,13 +44,21 @@ pip install -r requirements.txt
 live_emotion_detection/
 │
 ├── data/                         # Dataset (train/test images)
+├── templates/
+│   └── index.html               # Web app UI
+├── static/
+│   ├── style.css                # Web app styling
+│   └── script.js                # Web app frontend logic
+│
 ├── load_dataset.py              # Load dataset using ImageDataGenerator
 ├── check_imbalance.py           # Analyze class distribution
 ├── compute_weights.py           # Compute class weights
 ├── data_augmentation.py         # Apply data augmentation
 ├── build_model.py               # Build CNN model
 ├── train_model.py               # Train model
-├── realtime_detection.py        # Live emotion detection (webcam)
+├── emotion_engine.py            # Shared face + emotion detection logic
+├── app.py                       # Flask web application
+├── realtime_detection.py        # Live emotion detection (desktop webcam)
 │
 ├── best_emotion_model.keras     # Saved best model
 ├── requirements.txt             # Required packages
@@ -149,6 +157,31 @@ Follow this order step-by-step:
 
 ---
 
+### 8️⃣ Web Application 🌐
+
+📄 `app.py` (Flask)
+
+Run:
+
+```bash
+python app.py
+```
+
+Then open **http://127.0.0.1:5000** in your browser.
+
+Two modes:
+
+* **📹 Live Webcam** – start/stop the camera and see real-time emotion
+  detection streamed in the browser, with live confidence bars for every face.
+* **🖼️ Upload Image** – drop any photo and get the detected emotion(s) with
+  per-emotion probabilities and an annotated result image.
+
+The shared detection logic lives in `emotion_engine.py`, so the web app and
+scripts always use the same model and preprocessing. To use a different model
+file, set the `EMOTION_MODEL_PATH` environment variable before starting.
+
+---
+
 ## 🎯 Model Performance
 
 * Validation Accuracy: **~56%**
@@ -169,7 +202,6 @@ Follow this order step-by-step:
 * Use Transfer Learning (MobileNet / ResNet)
 * Add more training data
 * Improve face detection accuracy
-* Build UI (Streamlit / Web App)
 
 ---
 
